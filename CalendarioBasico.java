@@ -6,11 +6,11 @@
 public class CalendarioBasico
 {
     // Day in the calendar
-    private int day;
+    private DisplayDosCaracteres day;
     // Month in the calendar
-    private int month;
+    private DisplayDosCaracteres month;
     // Year in the calendar
-    private int year;
+    private DisplayDosCaracteres year;
 
     /**
      * Constructor for objects of class CalendarioBasico
@@ -18,9 +18,10 @@ public class CalendarioBasico
     public CalendarioBasico()
     {
         // Create an object of class CalendarioBasico
-        day = 01;
-        month = 01;
-        year = 01;
+        day = new DisplayDosCaracteres(31);
+        month = new DisplayDosCaracteres(13) ;
+        year = new DisplayDosCaracteres(100);
+
     }
     
     /**
@@ -28,9 +29,9 @@ public class CalendarioBasico
      */
     public void fijarFecha(int setDay, int setMonth, int setYear)
     {
-        day = setDay;
-        month = setMonth;
-        year = setYear;
+        day.setValorAlmacenado(setDay);
+        month.setValorAlmacenado(setMonth);
+        year.setValorAlmacenado(setYear);
     }
     
     /**
@@ -38,26 +39,16 @@ public class CalendarioBasico
      */
     public void avanzarFecha()
     {
-        if (day == 30)
-        {
-            if (month == 12)
-            {
-                // if month is 12, month gets 01 and +1 year
-                day = 01;
-                month = 01;
-                year += 1;
-            }
-            else
-            {
-                // if day is 30 but month isnt 12 day = 01 and month +1
-                day = 01;
-                month += 1;
-            }
-        }
-        else
-        {
-            day += 1;
-        }
+       if(day.getValorAlmacenado() == 30)
+       {
+           month.incrementaValorAlmacenado();
+       }
+       
+       if(month.getValorAlmacenado()== 01)
+       {
+           year.incrementaValorAlmacenado();
+       }
+       day.incrementaValorAlmacenado();
     }
     
     public String obtenerFecha()
@@ -66,27 +57,11 @@ public class CalendarioBasico
         String dayStng;
         String monthStng;
         String yearStng;
-        String zero;
-        zero = "0";
-        dayStng = String.valueOf(day);
-        monthStng = String.valueOf(month);
-        yearStng = String.valueOf(year);
-        if (yearStng.length() > 2 )
-        {
-            yearStng = yearStng.substring(2,4);
-        }
-        if (dayStng.length() < 2)
-        {
-               dayStng = zero + dayStng;
-        }
-        if (monthStng.length() < 2)
-        {
-               monthStng = "0" + monthStng;
-        }
-        if (yearStng.length() < 2)
-        {
-               yearStng = zero + yearStng;
-        }
+        
+        dayStng = day.getTextoDelDisplay();
+        monthStng = month.getTextoDelDisplay();
+        yearStng = year.getTextoDelDisplay();
+       
         return dayStng + "-" + monthStng + "-" + yearStng;
     }
     
