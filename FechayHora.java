@@ -16,7 +16,7 @@ public class FechayHora
      */
     public FechayHora()
     {
-        // initialise instance variables
-        
+        fecha = new CalendarioBasico ();
+        hora = new ClockDisplay();
     }
 }
