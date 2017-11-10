@@ -19,4 +19,13 @@ public class FechayHora
         fecha = new CalendarioBasico ();
         hora = new ClockDisplay();
     }
+    
+    public String getFechayHora()
+    {
+        String devolverf = fecha.obtenerFecha();
+        String devolverh = hora.getTime();
+        
+        return devolverf + " " + devolverh;
+        
+    }
 }
